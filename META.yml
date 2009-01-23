@@ -1,5 +1,5 @@
 ---
-abstract: 'A plain perl BibTeX parser'
+abstract: 'A pure perl BibTeX parser'
 author:
   - 'Gerhard Gossen <gerhard.gossen@googlemail.com>'
 build_requires:
@@ -24,4 +24,4 @@ requires:
   Text::Balanced: 0
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.2
+version: 0.21

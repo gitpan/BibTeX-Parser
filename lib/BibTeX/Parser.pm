@@ -10,7 +10,7 @@ use BibTeX::Parser::Entry;
 
 =head1 NAME
 
-BibTeX::Parser - A plain perl BibTeX parser
+BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
@@ -18,7 +18,7 @@ Version 0.1
 
 =cut
 
-our $VERSION = '0.2';
+our $VERSION = '0.21';
 
 my $re_namechar = qr/[a-zA-Z0-9\!\$\&\*\+\-\.\/\:\;\<\>\?\[\]\^\_\`\|]/o;
 my $re_name     = qr/$re_namechar+/o;
@@ -28,6 +28,7 @@ my $re_name     = qr/$re_namechar+/o;
 Parses BibTeX files.
 
     use BibTeX::Parser;
+	use IO::File;
 
     my $fh     = IO::File->new("filename");
 
@@ -40,9 +41,9 @@ Parses BibTeX files.
 		    my $type    = $entry->type;
 		    my $title   = $entry->field("title");
 
-		    my @authors = $entry->authors;
+		    my @authors = $entry->author;
 		    # or:
-		    my @editors = $entry->editors;
+		    my @editors = $entry->editor;
 		    
 		    foreach my $author (@authors) {
 			    print $author->first . " " 
