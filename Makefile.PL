@@ -9,7 +9,7 @@ WriteMakefile(
   NAME      => 'BibTeX::Parser',
   AUTHOR    => 'Gerhard\ Gossen\ \<gerhard\.gossen\@googlemail\.com\>',
   ABSTRACT  => 'A\ pure\ perl\ BibTeX\ parser',
-  VERSION   => '0.3',
+  VERSION   => '0.3.1',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {

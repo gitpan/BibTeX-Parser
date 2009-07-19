@@ -14,4 +14,4 @@ requires:
   IO::String: 0
   Test::More: 0
   Text::Balanced: 0
-version: 0.3
+version: 0.3.1

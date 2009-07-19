@@ -13,7 +13,7 @@ BibTeX::Entry - Contains a single entry of a BibTeX document.
 
 =head1 VERSION
 
-version 0.3
+version 0.3.1
 
 =cut
 
