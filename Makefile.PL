@@ -1,19 +1,22 @@
-use inc::Module::Install;
 
-name     'BibTeX-Parser';
-all_from 'lib/BibTeX/Parser.pm';
-author   'Gerhard Gossen <gerhard.gossen@googlemail.com>';
-license 'perl';
+use strict;
+use warnings;
 
-requires 'Text::Balanced';
+use ExtUtils::MakeMaker;
 
-build_requires 'Test::More';
-build_requires 'IO::String';
-build_requires 'IO::File';
-build_requires 'File::Spec';
-
-#auto_install;
-
-Meta->write();
-WriteAll;
-
+WriteMakefile(
+  DISTNAME  => 'BibTeX-Parser',
+  NAME      => 'BibTeX::Parser',
+  AUTHOR    => 'Gerhard\ Gossen\ \<gerhard\.gossen\@googlemail\.com\>',
+  ABSTRACT  => 'A\ pure\ perl\ BibTeX\ parser',
+  VERSION   => '0.3',
+  EXE_FILES => [ qw() ],
+  (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
+  PREREQ_PM    => {
+    "Test::More" => '0',
+    "IO::File" => '0',
+    "IO::String" => '0',
+    "File::Spec" => '0',
+    "Text::Balanced" => '0',
+  },
+);

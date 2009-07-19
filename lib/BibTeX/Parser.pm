@@ -2,6 +2,9 @@ package BibTeX::Parser;
 
 use warnings;
 use strict;
+
+our $VERSION = '0.3';
+
 use Text::Balanced qw(extract_bracketed extract_delimited);
 
 use BibTeX::Parser::Entry;
@@ -14,11 +17,9 @@ BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
-Version 0.1
+version 0.3
 
 =cut
-
-our $VERSION = '0.21';
 
 my $re_namechar = qr/[a-zA-Z0-9\!\$\&\*\+\-\.\/\:\;\<\>\?\[\]\^\_\`\|]/o;
 my $re_name     = qr/$re_namechar+/o;
@@ -113,19 +114,27 @@ sub _parse_next {
         if (/@($re_name)/cgo) {
 			my $type = uc $1;
             $current_entry->type( $type );
+            my $start_pos = pos($_) - length($type) - 1;
 
-			# read rest of entry (matches braces
+            # read rest of entry (matches braces)
             my $bracelevel = 0;
             $bracelevel += tr/\{/\{/;    #count braces
             $bracelevel -= tr/\}/\}/;
             while ( $bracelevel != 0 ) {
                 my $position = pos($_);
                 my $line     = $self->{fh}->getline;
+				last unless defined $line;
                 $bracelevel =
                   $bracelevel + ( $line =~ tr/\{/\{/ ) - ( $line =~ tr/\}/\}/ );
                 $_ .= $line;
                 pos($_) = $position;
             }
+
+            # Remember raw bibtex code
+            my $raw = substr($_, $start_pos);
+            $raw =~ s/^\s+//;
+            $raw =~ s/\s+$//;
+            $current_entry->raw_bibtex($raw);
 
             my $pos = pos $_;
             tr/\n/ /;
@@ -241,18 +250,5 @@ sub _parse_string {
     $value =~ s/[\s\n]+/ /g;
     return $value;
 }
-
-=head1 AUTHOR
-
-Gerhard Gossen, C<< <gerhard.gossen at googlemail.com> >>
-
-
-=head1 LICENSE
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-
-=cut
 
 1;    # End of BibTeX::Parser

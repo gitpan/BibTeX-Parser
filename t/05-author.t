@@ -25,6 +25,16 @@ my %names = (
 	""	=> [undef, undef, undef, undef],
 	"   "	=> [undef, undef, undef, undef],
 	"\n"	=> [undef, undef, undef, undef],
+	"al." => [undef, undef, "al.", undef],
+	"et. al." => [undef, undef, "et. al.", undef],
+	"O'Malley, A." => ["A.", undef, "O'Malley", undef],
+	"A. O'Malley" => ["A.", undef, "O'Malley", undef],
+	"Arthur O'Malley" => ["Arthur", undef, "O'Malley", undef],
+	"O'Malley, Arthur" => ["Arthur", undef, "O'Malley", undef],
+	'L.M. M\"uller' => ["L.M.", undef, 'M\"uller', undef],
+	'M\"uller, L.M.' => ["L.M.", undef, 'M\"uller', undef],
+	'L.M. M"uller' => ["L.M.", undef, 'M"uller', undef],
+	'M"uller, L.M.' => ["L.M.", undef, 'M"uller', undef],
 );
 
 plan tests => (keys(%names) * 6 + 5);
@@ -41,7 +51,7 @@ is($author->jr,    undef, "Initial state 'jr'");
 
 foreach my $name (keys %names) {
 
-	is_deeply([BibTeX::Parser::Author->split($name)], $names{$name}, $name =~ /\w/  ? $name : "Whitespace" );
+	is_deeply([BibTeX::Parser::Author->split($name)], $names{$name}, $name =~ /\w/  ? $name : "whitespace name: '$name'" );
 
 	$author = new BibTeX::Parser::Author $name;
 

@@ -3,6 +3,8 @@ package BibTeX::Parser::Author;
 use warnings;
 use strict;
 
+our $VERSION = '0.3';
+
 use overload
 	'""' => \&to_string;
 
@@ -12,12 +14,9 @@ BibTeX::Author - Contains a single author for a BibTeX document.
 
 =head1 VERSION
 
-Version 0.01
+version 0.3
 
 =cut
-
-our $VERSION = '0.2';
-
 
 =head1 SYNOPSIS
 
@@ -110,36 +109,44 @@ sub jr {
 =head2 split
 
 Split name into (firstname, von part, last name, jr part). Returns array
-with four strings, some of them possibliy empty.
+with four strings, some of them possibly empty.
 
 =cut
 
 sub split {
 	my ($self_or_class, $name) = @_;
 
+	# remove whitespace at start and end of string
+	$name =~ s/^\s*(.*)\s*$/$1/s;
+
 	my @parts = split /\s*,\s*/, $name;
 
 	if (@parts == 0) {
 		return (undef, undef, undef, undef);
 	} elsif (@parts == 1) {	# name without comma
-		if ( $name =~ /\b[[:lower:]]/) { # name has von part
+		if ( $name =~ /(^|\s)[[:lower:]]/) { # name has von part or has only lowercase names
 			my @name_parts = split /\s+/, $parts[0];
 
 			my $first;
-			while (ucfirst($name_parts[0]) eq $name_parts[0] ) {
+			while (@name_parts && ucfirst($name_parts[0]) eq $name_parts[0] ) {
 				$first .= $first ? ' ' . shift @name_parts : shift @name_parts;
 			}
 
 			my $von;
 			# von part are lowercase words
-			while ( lc($name_parts[0]) eq $name_parts[0] ) {
+			while ( @name_parts && lc($name_parts[0]) eq $name_parts[0] ) {
 				$von .= $von ? ' ' . shift @name_parts : shift @name_parts;
 			}
 
-			return ($first, $von, join(" ", @name_parts), undef);
+			if (@name_parts) {
+				return ($first, $von, join(" ", @name_parts), undef);
+			} else {
+				return (undef, undef, $name, undef);
+			}
 		} else {
-			$name =~ /^((.*) )?\b([\w-]+)$/;
-			return ($2, undef, $3, undef);
+			if ($name =~ /^((.*)\s+)?\b(\S+)$/) {
+				return ($2, undef, $3, undef);
+			}
 		}
 
 	} elsif (@parts == 2) {
@@ -177,61 +184,5 @@ sub to_string {
 		return ($self->von ? $self->von . " " : '') . $self->last . ($self->first ? ", " . $self->first : '');
 	}
 }
-
-=head1 AUTHOR
-
-Gerhard Gossen, C<< <gerhard.gossen at googlemail.com> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-bibtex-entry at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=BibTeX-Parser>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-
-
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc BibTeX::Parser
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=BibTeX-Parser>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/BibTeX-Parser>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/BibTeX-Parser>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/BibTeX-Parser>
-
-=back
-
-
-=head1 ACKNOWLEDGEMENTS
-
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2008 Gerhard Gossen, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
-
-
-=cut
 
 1; # End of BibTeX::Entry
