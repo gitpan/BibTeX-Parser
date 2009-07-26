@@ -1,9 +1,9 @@
 package BibTeX::Parser::Entry;
+our $VERSION = '0.3.2';
+
 
 use warnings;
 use strict;
-
-our $VERSION = '0.3';
 
 use BibTeX::Parser::Author;
 
@@ -13,7 +13,7 @@ BibTeX::Entry - Contains a single entry of a BibTeX document.
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =cut
 
