@@ -1,6 +1,5 @@
 package BibTeX::Parser;
-our $VERSION = '0.3.2';
-
+our $VERSION = '0.4';
 # ABSTRACT: A pure perl BibTeX parser
 use warnings;
 use strict;
@@ -15,7 +14,7 @@ BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
-version 0.3.2
+version 0.4
 
 =cut
 
@@ -110,7 +109,7 @@ sub _parse_next {
 
         my $current_entry = new BibTeX::Parser::Entry;
         if (/@($re_name)/cgo) {
-			my $type = uc $1;
+	    my $type = uc $1;
             $current_entry->type( $type );
             my $start_pos = pos($_) - length($type) - 1;
 
