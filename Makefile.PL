@@ -4,33 +4,49 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.11;
+use ExtUtils::MakeMaker 6.31;
 
 
 
 my %WriteMakefileArgs = (
-                       'test' => {
-                                   'TESTS' => 't/*.t'
-                                 },
-                       'NAME' => 'BibTeX::Parser',
-                       'DISTNAME' => 'BibTeX-Parser',
-                       'AUTHOR' => 'Gerhard Gossen <gerhard.gossen@googlemail.com>',
-                       'ABSTRACT' => 'A pure perl BibTeX parser',
-                       'EXE_FILES' => [],
-                       'VERSION' => '0.4',
-                       'LICENSE' => 'perl',
-                       'PREREQ_PM' => {
-                                        'Test::More' => '0',
-                                        'IO::File' => '0',
-                                        'IO::String' => '0',
-                                        'ExtUtils::MakeMaker' => '6.11',
-                                        'File::Spec' => '0'
-                                      }
-                     );
+  'ABSTRACT' => 'A pure perl BibTeX parser',
+  'AUTHOR' => 'Gerhard Gossen <gerhard.gossen@googlemail.com>',
+  'BUILD_REQUIRES' => {},
+  'CONFIGURE_REQUIRES' => {
+    'ExtUtils::MakeMaker' => '6.31'
+  },
+  'DISTNAME' => 'BibTeX-Parser',
+  'EXE_FILES' => [],
+  'LICENSE' => 'perl',
+  'NAME' => 'BibTeX::Parser',
+  'PREREQ_PM' => {
+    'File::Spec' => '0',
+    'IO::File' => '0',
+    'IO::String' => '0',
+    'Test::More' => '0'
+  },
+  'VERSION' => '0.5',
+  'test' => {
+    'TESTS' => 't/*.t'
+  }
+);
 
 
-delete $WriteMakefileArgs{LICENSE}
-  unless eval { ExtUtils::MakeMaker->VERSION(6.31) };
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
+  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
+  my $pp = $WriteMakefileArgs{PREREQ_PM};
+  for my $mod ( keys %$br ) {
+    if ( exists $pp->{$mod} ) {
+      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
+    }
+    else {
+      $pp->{$mod} = $br->{$mod};
+    }
+  }
+}
+
+delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
+  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
 
 WriteMakefile(%WriteMakefileArgs);
 
