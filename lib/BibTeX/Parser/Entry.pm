@@ -1,6 +1,6 @@
 package BibTeX::Parser::Entry;
 BEGIN {
-  $BibTeX::Parser::Entry::VERSION = '0.6';
+  $BibTeX::Parser::Entry::VERSION = '0.61';
 }
 
 use warnings;
@@ -86,8 +86,35 @@ use LaTeX::ToUnicode qw( convert );
 
 sub cleaned_field {
         my ( $self, $field, @options ) = @_;
-        use Data::Dumper;
-        return convert( $self->field( lc $field ), @options ); # TODO: do not remove braces from author fields
+        if ( $field =~ /author|editor/i ) {
+            return $self->field( $field );
+        } else {
+            return convert( $self->field( lc $field ), @options );
+        }
+}
+
+
+sub cleaned_author {
+    my $self = shift;
+    $self->_handle_cleaned_author_editor( [ $self->author ], @_ );
+}
+
+
+sub cleaned_editor {
+    my $self = shift;
+    $self->_handle_cleaned_author_editor( [ $self->editor ], @_ );
+}
+
+sub _handle_cleaned_author_editor {
+    my ( $self, $authors, @options ) = @_;
+    map {
+        my $author = $_;
+        my $new_author = BibTeX::Parser::Author->new;
+        map {
+            $new_author->$_( convert( $author->$_, @options ) )
+        } grep { defined $author->$_ } qw( first von last jr );
+        $new_author;
+    } @$authors;
 }
 
 no LaTeX::ToUnicode;
@@ -143,7 +170,7 @@ sub _split_author_field {
 		push @names, $buffer;
 		$buffer = "";
 	    } elsif ( $2 =~ /\{/ ) {
-		$buffer .= "{" . $match;
+		$buffer .= $match . "{";
 		if ( $field =~ /\G (.* \})/cgx ) {
 		    $buffer .= $1;
 		} else {
@@ -216,7 +243,7 @@ BibTeX::Parser::Entry
 
 =head1 VERSION
 
-version 0.6
+version 0.61
 
 =head1 SYNOPSIS
 
@@ -243,7 +270,7 @@ BibTeX::Entry - Contains a single entry of a BibTeX document.
 
 =head1 VERSION
 
-version 0.6
+version 0.61
 
 =head1 FUNCTIONS
 
@@ -276,6 +303,16 @@ field, the second (optional) value is the new value.
 =head2 cleaned_field($name)
 
 Retrieve the contents of a field in a format that is cleaned of TeX markup.
+
+=head2 cleaned_author
+
+Get an array of L<BibTeX::Parser::Author> objects for the authors of this
+entry. Each name has been cleaned of accents and braces.
+
+=head2 cleaned_editor
+
+Get an array of L<BibTeX::Parser::Author> objects for the editors of this
+entry. Each name has been cleaned of accents and braces.
 
 =head2 author([@authors])
 
