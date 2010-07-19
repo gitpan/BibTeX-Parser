@@ -25,6 +25,7 @@ t/bibs/06.bib
 t/bibs/09-complex.bib
 t/bibs/10-funnyname.bib
 t/bibs/english.bib
+t/cleaned_field.t
 t/pod-coverage.t
 t/pod.t
 t/release-pod-coverage.t

@@ -1,6 +1,6 @@
 package BibTeX::Parser::Entry;
 BEGIN {
-  $BibTeX::Parser::Entry::VERSION = '0.5';
+  $BibTeX::Parser::Entry::VERSION = '0.6';
 }
 
 use warnings;
@@ -80,6 +80,17 @@ sub field {
 	}
 
 }
+
+use LaTeX::ToUnicode qw( convert );
+
+
+sub cleaned_field {
+        my ( $self, $field, @options ) = @_;
+        use Data::Dumper;
+        return convert( $self->field( lc $field ), @options ); # TODO: do not remove braces from author fields
+}
+
+no LaTeX::ToUnicode;
 
 sub _handle_author_editor {
 	my $type = shift;
@@ -205,7 +216,7 @@ BibTeX::Parser::Entry
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 SYNOPSIS
 
@@ -232,7 +243,7 @@ BibTeX::Entry - Contains a single entry of a BibTeX document.
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 FUNCTIONS
 
@@ -261,6 +272,10 @@ Get or set the reference key of the entry.
 
 Get or set the contents of a field. The first parameter is the name of the
 field, the second (optional) value is the new value.
+
+=head2 cleaned_field($name)
+
+Retrieve the contents of a field in a format that is cleaned of TeX markup.
 
 =head2 author([@authors])
 

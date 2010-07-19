@@ -23,9 +23,10 @@ my %WriteMakefileArgs = (
     'File::Spec' => '0',
     'IO::File' => '0',
     'IO::String' => '0',
+    'LaTeX::ToUnicode' => '0.02',
     'Test::More' => '0'
   },
-  'VERSION' => '0.5',
+  'VERSION' => '0.6',
   'test' => {
     'TESTS' => 't/*.t'
   }
