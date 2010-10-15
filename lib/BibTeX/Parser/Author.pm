@@ -1,6 +1,6 @@
 package BibTeX::Parser::Author;
 BEGIN {
-  $BibTeX::Parser::Author::VERSION = '0.61';
+  $BibTeX::Parser::Author::VERSION = '0.62';
 }
 
 use warnings;
@@ -192,7 +192,7 @@ BibTeX::Parser::Author
 
 =head1 VERSION
 
-version 0.61
+version 0.62
 
 =head1 SYNOPSIS
 
@@ -218,7 +218,7 @@ BibTeX::Author - Contains a single author for a BibTeX document.
 
 =head1 VERSION
 
-version 0.61
+version 0.62
 
 =head1 FUNCTIONS
 

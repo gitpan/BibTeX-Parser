@@ -1,6 +1,6 @@
 package BibTeX::Parser::Entry;
 BEGIN {
-  $BibTeX::Parser::Entry::VERSION = '0.61';
+  $BibTeX::Parser::Entry::VERSION = '0.62';
 }
 
 use warnings;
@@ -243,7 +243,7 @@ BibTeX::Parser::Entry
 
 =head1 VERSION
 
-version 0.61
+version 0.62
 
 =head1 SYNOPSIS
 
@@ -270,7 +270,7 @@ BibTeX::Entry - Contains a single entry of a BibTeX document.
 
 =head1 VERSION
 
-version 0.61
+version 0.62
 
 =head1 FUNCTIONS
 

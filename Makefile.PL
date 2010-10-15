@@ -11,7 +11,9 @@ use ExtUtils::MakeMaker 6.31;
 my %WriteMakefileArgs = (
   'ABSTRACT' => 'A pure perl BibTeX parser',
   'AUTHOR' => 'Gerhard Gossen <gerhard.gossen@googlemail.com>',
-  'BUILD_REQUIRES' => {},
+  'BUILD_REQUIRES' => {
+    'Test::More' => '0.88'
+  },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.31'
   },
@@ -26,7 +28,7 @@ my %WriteMakefileArgs = (
     'LaTeX::ToUnicode' => '0.02',
     'Test::More' => '0'
   },
-  'VERSION' => '0.61',
+  'VERSION' => '0.62',
   'test' => {
     'TESTS' => 't/*.t'
   }

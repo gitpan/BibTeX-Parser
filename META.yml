@@ -2,11 +2,12 @@
 abstract: 'A pure perl BibTeX parser'
 author:
   - 'Gerhard Gossen <gerhard.gossen@googlemail.com>'
-build_requires: {}
+build_requires:
+  Test::More: 0.88
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.101880, CPAN::Meta::Converter version 2.101670'
+generated_by: 'Dist::Zilla version 4.102341, CPAN::Meta::Converter version 2.101670'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,4 +21,4 @@ requires:
   Test::More: 0
 resources:
   repository: http://github.com/gerhardgossen/bibtex-parser
-version: 0.61
+version: 0.62
