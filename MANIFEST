@@ -24,7 +24,11 @@ t/bibs/01.bib
 t/bibs/06.bib
 t/bibs/09-complex.bib
 t/bibs/10-funnyname.bib
+t/bibs/endnote.txt
+t/bibs/engineering_village.txt
 t/bibs/english.bib
+t/bibs/mathscinet.txt
+t/bug66325.t
 t/cleaned_field.t
 t/pod-coverage.t
 t/pod.t

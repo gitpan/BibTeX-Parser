@@ -1,6 +1,6 @@
 package BibTeX::Parser;
 BEGIN {
-  $BibTeX::Parser::VERSION = '0.62';
+  $BibTeX::Parser::VERSION = '0.63';
 }
 # ABSTRACT: A pure perl BibTeX parser
 use warnings;
@@ -103,7 +103,7 @@ sub _parse_next {
                 $current_entry->parse_ok(1);
 
 				# parse key
-                if (/\G\{\s*($re_name),[\s\n]*/cgo) {
+                if (/\G\s*\{(?:\s*($re_name)\s*,[\s\n]*|\s+\r?\s*)/cgo) {
                     $current_entry->key($1);
 
 					# fields
@@ -218,7 +218,7 @@ BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 SYNOPSIS
 
@@ -261,7 +261,7 @@ BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 FUNCTIONS
 
@@ -283,7 +283,7 @@ Gerhard Gossen <gerhard.gossen@googlemail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Gerhard Gossen.
+This software is copyright (c) 2011 by Gerhard Gossen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,6 +1,6 @@
 package BibTeX::Parser::Author;
 BEGIN {
-  $BibTeX::Parser::Author::VERSION = '0.62';
+  $BibTeX::Parser::Author::VERSION = '0.63';
 }
 
 use warnings;
@@ -192,7 +192,7 @@ BibTeX::Parser::Author
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 SYNOPSIS
 
@@ -218,7 +218,7 @@ BibTeX::Author - Contains a single author for a BibTeX document.
 
 =head1 VERSION
 
-version 0.62
+version 0.63
 
 =head1 FUNCTIONS
 
@@ -257,7 +257,7 @@ Gerhard Gossen <gerhard.gossen@googlemail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by Gerhard Gossen.
+This software is copyright (c) 2011 by Gerhard Gossen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
