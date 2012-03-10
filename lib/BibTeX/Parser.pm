@@ -1,6 +1,6 @@
 package BibTeX::Parser;
-BEGIN {
-  $BibTeX::Parser::VERSION = '0.63';
+{
+  $BibTeX::Parser::VERSION = '0.64';
 }
 # ABSTRACT: A pure perl BibTeX parser
 use warnings;
@@ -209,6 +209,7 @@ sub _extract_bracketed
 }
 
 1;    # End of BibTeX::Parser
+
 __END__
 =pod
 
@@ -218,7 +219,7 @@ BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
-version 0.63
+version 0.64
 
 =head1 SYNOPSIS
 
@@ -261,7 +262,7 @@ BibTeX::Parser - A pure perl BibTeX parser
 
 =head1 VERSION
 
-version 0.63
+version 0.64
 
 =head1 FUNCTIONS
 
@@ -283,7 +284,7 @@ Gerhard Gossen <gerhard.gossen@googlemail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Gerhard Gossen.
+This software is copyright (c) 2012 by Gerhard Gossen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

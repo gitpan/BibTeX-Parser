@@ -4,33 +4,33 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'A pure perl BibTeX parser',
-  'AUTHOR' => 'Gerhard Gossen <gerhard.gossen@googlemail.com>',
-  'BUILD_REQUIRES' => {
-    'Test::More' => '0.88'
+  "ABSTRACT" => "A pure perl BibTeX parser",
+  "AUTHOR" => "Gerhard Gossen <gerhard.gossen\@googlemail.com>",
+  "BUILD_REQUIRES" => {
+    "Test::More" => "0.88"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'BibTeX-Parser',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'BibTeX::Parser',
-  'PREREQ_PM' => {
-    'File::Spec' => '0',
-    'IO::File' => '0',
-    'IO::String' => '0',
-    'LaTeX::ToUnicode' => '0.02',
-    'Test::More' => '0'
+  "DISTNAME" => "BibTeX-Parser",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "BibTeX::Parser",
+  "PREREQ_PM" => {
+    "File::Spec" => 0,
+    "IO::File" => 0,
+    "IO::String" => 0,
+    "LaTeX::ToUnicode" => "0.02",
+    "Test::More" => 0
   },
-  'VERSION' => '0.63',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.64",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

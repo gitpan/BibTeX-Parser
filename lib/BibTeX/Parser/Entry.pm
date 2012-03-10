@@ -1,6 +1,6 @@
 package BibTeX::Parser::Entry;
-BEGIN {
-  $BibTeX::Parser::Entry::VERSION = '0.63';
+{
+  $BibTeX::Parser::Entry::VERSION = '0.64';
 }
 
 use warnings;
@@ -14,7 +14,9 @@ sub new {
 	my ($class, $type, $key, $parse_ok, $fieldsref) = @_;
 
 	my %fields = defined $fieldsref ? %$fieldsref : ();
-	$fields{_type}     = uc($type);
+        if (defined $type) {
+            $fields{_type} = uc($type);
+        }
 	$fields{_key}      = $key;
 	$fields{_parse_ok} = $parse_ok;
         $fields{_raw}      = '';
@@ -234,6 +236,7 @@ sub raw_bibtex {
 }
 
 1; # End of BibTeX::Entry
+
 __END__
 =pod
 
@@ -243,7 +246,7 @@ BibTeX::Parser::Entry
 
 =head1 VERSION
 
-version 0.63
+version 0.64
 
 =head1 SYNOPSIS
 
@@ -270,7 +273,7 @@ BibTeX::Entry - Contains a single entry of a BibTeX document.
 
 =head1 VERSION
 
-version 0.63
+version 0.64
 
 =head1 FUNCTIONS
 
@@ -348,7 +351,7 @@ Gerhard Gossen <gerhard.gossen@googlemail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Gerhard Gossen.
+This software is copyright (c) 2012 by Gerhard Gossen.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
